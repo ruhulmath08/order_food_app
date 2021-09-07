@@ -12,17 +12,17 @@ class PopularItemModel {
   });
 
   PopularItemModel.fromJson(Map<String, dynamic> json) {
-    foodId = json['foodId'];
+    foodId = json['food_id'];
     name = json['name'];
-    menuId = json['menuId'];
+    menuId = json['menu_id'];
     image = json['image'];
   }
 
   Map<String, dynamic> toJson() {
-    var data = Map<String, dynamic>();
-    data['foodId'] = this.foodId;
+    final data = Map<String, dynamic>();
+    data['food_id'] = this.foodId;
     data['name'] = this.name;
-    data['menuId'] = this.menuId;
+    data['menu_id'] = this.menuId;
     data['image'] = this.image;
 
     return data;

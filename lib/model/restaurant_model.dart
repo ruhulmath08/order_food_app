@@ -1,4 +1,5 @@
 class RestaurantModel {
+  String restaurantId = '';
   String address = '';
   String name = '';
   String imageUrl = '';
