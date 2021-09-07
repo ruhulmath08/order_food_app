@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:order_food_app/state/main_state.dart';
 import 'package:order_food_app/view_model/restaurant_home_vm/restaurant_home_vm.dart';
 import 'package:order_food_app/view_model/restaurant_home_vm/restaurant_home_vm_imp.dart';
+import 'package:order_food_app/widgets/restaurent_home/best_deal_widget.dart';
 import 'package:order_food_app/widgets/restaurent_home/most_popular_widget.dart';
 
 class RestaurantHome extends StatelessWidget {
@@ -35,7 +36,7 @@ class RestaurantHome extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: Container(color: Colors.blue),
+              child: BestDealsWidget(viewModel: viewModel, mainStateController: mainStateController),
             ),
           ],
         ),
