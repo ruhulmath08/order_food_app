@@ -34,7 +34,11 @@ dependencies:
   firebase_database: any
   get: any
   auto_animated: any
+<<<<<<< HEAD
   flutter_zoom_drawer: any
+=======
+  carousel_slider: any
+>>>>>>> f20d6d2774b36042e9e54727bc4a55037ae23040
 
 dev_dependencies:
   flutter_test:

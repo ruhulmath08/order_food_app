@@ -7,4 +7,9 @@ class RestaurantHomeViewModelImp implements RestaurantHomeViewModel {
   Future<List<PopularItemModel>> displayMostPopularByRestaurantId(String restaurantId) {
     return getMostPopularByRestaurantId(restaurantId);
   }
+
+  @override
+  Future<List<PopularItemModel>> displayBestDealsByRestaurantId(String restaurantId) {
+    return getMostPopularByRestaurantId(restaurantId);
+  }
 }
