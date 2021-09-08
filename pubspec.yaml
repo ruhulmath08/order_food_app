@@ -34,6 +34,7 @@ dependencies:
   firebase_database: any
   get: any
   auto_animated: any
+  flutter_zoom_drawer: any
 
 dev_dependencies:
   flutter_test:
