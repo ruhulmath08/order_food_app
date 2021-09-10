@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:order_food_app/model/popular_item_model.dart';
 import 'package:order_food_app/state/main_state.dart';
-import 'package:order_food_app/view_model/restaurant_home_vm/restaurant_home_vm.dart';
+import 'package:order_food_app/view_model/restaurant_home_detail_vm/restaurant_home_detail_vm.dart';
 
 class BestDealsWidget extends StatelessWidget {
   const BestDealsWidget({
@@ -15,7 +15,7 @@ class BestDealsWidget extends StatelessWidget {
     required this.mainStateController,
   }) : super(key: key);
 
-  final RestaurantHomeViewModel viewModel;
+  final RestaurantHomeDetailViewModel viewModel;
   final MainStateController mainStateController;
 
   @override

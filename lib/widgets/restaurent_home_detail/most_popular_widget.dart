@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:order_food_app/model/popular_item_model.dart';
 import 'package:order_food_app/state/main_state.dart';
 import 'package:order_food_app/strings/restaurant_home_strings.dart';
-import 'package:order_food_app/view_model/restaurant_home_vm/restaurant_home_vm.dart';
+import 'package:order_food_app/view_model/restaurant_home_detail_vm/restaurant_home_detail_vm.dart';
 import 'package:order_food_app/widgets/common/common_widgets.dart';
 
 class MostPopularWidget extends StatelessWidget {
@@ -14,7 +14,7 @@ class MostPopularWidget extends StatelessWidget {
     required this.mainStateController,
   }) : super(key: key);
 
-  final RestaurantHomeViewModel viewModel;
+  final RestaurantHomeDetailViewModel viewModel;
   final MainStateController mainStateController;
 
   @override

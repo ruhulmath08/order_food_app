@@ -1,44 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:order_food_app/state/main_state.dart';
-import 'package:order_food_app/view_model/restaurant_home_vm/restaurant_home_vm.dart';
-import 'package:order_food_app/view_model/restaurant_home_vm/restaurant_home_vm_imp.dart';
-import 'package:order_food_app/widgets/restaurent_home/best_deal_widget.dart';
-import 'package:order_food_app/widgets/restaurent_home/most_popular_widget.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:order_food_app/screens/menu.dart';
+import 'package:order_food_app/screens/restaurant_home_detail.dart';
 
 class RestaurantHome extends StatelessWidget {
-  final MainStateController mainStateController = Get.find();
-  final RestaurantHomeViewModel viewModel = RestaurantHomeViewModelImp();
-
+  final drawerZoomController = ZoomDrawerController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          mainStateController.selectedRestaurant.value.name,
-          style: GoogleFonts.jetBrainsMono(color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 10,
-        iconTheme: IconThemeData(
-          color: Colors.black,
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            Expanded(
-              flex: 1,
-              child: MostPopularWidget(viewModel: viewModel, mainStateController: mainStateController),
-            ),
-            Expanded(
-              flex: 2,
-              child: BestDealsWidget(viewModel: viewModel, mainStateController: mainStateController),
-            ),
-          ],
+    return SafeArea(
+      child: Scaffold(
+        body: ZoomDrawer(
+          controller: drawerZoomController,
+          menuScreen: MenuScreen(zoomDrawerController: drawerZoomController),
+          mainScreen: RestaurantHomeDetails(drawerZoomController),
+          borderRadius: 24.0,
+          showShadow: true,
+          angle: 0.0,
+          backgroundColor: Colors.grey[300]!,
+          slideWidth: MediaQuery.of(context).size.width * 0.65,
+          openCurve: Curves.bounceInOut,
+          closeCurve: Curves.ease,
         ),
       ),
     );
