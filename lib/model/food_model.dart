@@ -47,6 +47,8 @@ class FoodModel {
     data['image'] = this.image;
     data['price'] = this.price;
     data['description'] = this.description;
+    data['size'] = this.size.map((v) => v.toJson()).toList();
+    data['addon'] = this.addon.map((v) => v.toJson()).toList();
 
     return data;
   }

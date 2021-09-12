@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:order_food_app/const/const.dart';
+import 'package:order_food_app/strings/restaurant_home_strings.dart';
+import 'package:order_food_app/view_model/menu/menu_viewmodel_imp.dart';
 import 'package:order_food_app/widgets/menu/categories_menu_widget.dart';
 import 'package:order_food_app/widgets/menu/home_menu_widget.dart';
 
 class MenuScreen extends StatelessWidget {
   final ZoomDrawerController zoomDrawerController;
+  final viewModel = MenuViewModelImp();
 
-  const MenuScreen({required this.zoomDrawerController});
+  MenuScreen({required this.zoomDrawerController});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,7 @@ class MenuScreen extends StatelessWidget {
             Divider(thickness: 1, color: Colors.white70),
             HomeMenuWidget(zoomDrawerController: zoomDrawerController),
             Divider(thickness: 1, color: Colors.white70),
-            CategoriesWidget(),
+            MenuWidget(callback: viewModel.navigateCategories, icon: Icons.list, menuName: categoryText),
             Divider(thickness: 1, color: Colors.white70),
           ],
         ),
