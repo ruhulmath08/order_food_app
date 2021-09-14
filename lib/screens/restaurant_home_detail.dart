@@ -37,11 +37,17 @@ class RestaurantHomeDetails extends StatelessWidget {
           children: [
             Expanded(
               flex: 1,
-              child: MostPopularWidget(viewModel: viewModel, mainStateController: mainStateController),
+              child: MostPopularWidget(
+                viewModel: viewModel,
+                mainStateController: mainStateController,
+              ),
             ),
             Expanded(
               flex: 2,
-              child: BestDealsWidget(viewModel: viewModel, mainStateController: mainStateController),
+              child: BestDealsWidget(
+                viewModel: viewModel,
+                mainStateController: mainStateController,
+              ),
             ),
           ],
         ),
