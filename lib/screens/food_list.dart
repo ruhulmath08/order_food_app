@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:order_food_app/const/const.dart';
+import 'package:order_food_app/screens/food_detail.dart';
 import 'package:order_food_app/state/category_state.dart';
+import 'package:order_food_app/state/food_list_state.dart';
 import 'package:order_food_app/strings/food_list_string.dart';
 import 'package:order_food_app/widgets/common/common_widgets.dart';
 
 class FoodListScreen extends StatelessWidget {
   final CategoryStateController categoryStateController = Get.find();
+  final FoodListStateController foodListStateController = Get.put(FoodListStateController());
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,11 @@ class FoodListScreen extends StatelessWidget {
               itemCount: categoryStateController.selectedCategory.value.foods.length,
               itemBuilder: animationBuilder(
                 (index) => InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    //assign to state
+                    foodListStateController.selectedFood.value = categoryStateController.selectedCategory.value.foods[index];
+                    Get.to(() => FoodDetailScreen());
+                  },
                   child: SizedBox(
                     height: MediaQuery.of(context).size.height / 6 * 2,
                     child: Card(
