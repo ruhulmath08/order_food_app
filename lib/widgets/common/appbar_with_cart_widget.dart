@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:order_food_app/screens/cart_screen.dart';
 import 'package:order_food_app/state/cart_state.dart';
 
 class AppBarWithCartButton extends StatelessWidget implements PreferredSizeWidget {
@@ -33,7 +34,7 @@ class AppBarWithCartButton extends StatelessWidget implements PreferredSizeWidge
               style: GoogleFonts.jetBrainsMono(color: Colors.white),
             ),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () => Get.to(CartDetailsScreen()),
               icon: Icon(Icons.shopping_bag),
             ),
           ),
