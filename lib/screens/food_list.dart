@@ -5,28 +5,22 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:order_food_app/const/const.dart';
 import 'package:order_food_app/screens/food_detail.dart';
+import 'package:order_food_app/state/cart_state.dart';
 import 'package:order_food_app/state/category_state.dart';
 import 'package:order_food_app/state/food_list_state.dart';
 import 'package:order_food_app/strings/food_list_string.dart';
+import 'package:order_food_app/widgets/common/appbar_with_cart_widget.dart';
 import 'package:order_food_app/widgets/common/common_widgets.dart';
 
 class FoodListScreen extends StatelessWidget {
   final CategoryStateController categoryStateController = Get.find();
   final FoodListStateController foodListStateController = Get.put(FoodListStateController());
+  final CartStateController cartStateController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '${categoryStateController.selectedCategory.value.name}',
-          style: GoogleFonts.jetBrainsMono(color: Colors.black),
-        ),
-        elevation: 10,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        iconTheme: IconThemeData(color: Colors.black),
-      ),
+      appBar: AppBarWithCartButton(title: categoryStateController.selectedCategory.value.name),
       body: Column(
         children: [
           Expanded(
@@ -106,7 +100,7 @@ class FoodListScreen extends StatelessWidget {
                                                   ),
                                                   SizedBox(width: 50),
                                                   IconButton(
-                                                    onPressed: () {},
+                                                    onPressed: () => cartStateController.addToCart(categoryStateController.selectedCategory.value.foods[index]),
                                                     icon: Icon(
                                                       Icons.add_shopping_cart,
                                                       color: Colors.white,

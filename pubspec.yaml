@@ -36,8 +36,11 @@ dependencies:
   auto_animated: any
   flutter_zoom_drawer: any
   carousel_slider: any
-  flutter_elegant_number_button: any
+  flutter_elegant_number_button: any #for add or substract food item
   flutter_rating_bar: any
+  badges: any #for create cart item
+  get_storage: any #for store cart value
+
 
 dev_dependencies:
   flutter_test:
