@@ -40,7 +40,8 @@ dependencies:
   flutter_rating_bar: any
   badges: any #for create cart item
   get_storage: any #for store cart value
-
+  intl: any
+  flutter_slidable: any
 
 dev_dependencies:
   flutter_test:
