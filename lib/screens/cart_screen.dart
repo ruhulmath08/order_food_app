@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_elegant_number_button/flutter_elegant_number_button.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:order_food_app/state/cart_state.dart';
 import 'package:order_food_app/strings/cart_string.dart';
+import 'package:order_food_app/view_model/cart_vm/cart_view_model_imp.dart';
 import 'package:order_food_app/widgets/cart/cart_image_widget.dart';
+import 'package:order_food_app/widgets/cart/cart_info_widget.dart';
 
 class CartDetailsScreen extends StatelessWidget {
   final box = GetStorage();
   final CartStateController controller = Get.find();
+  final CartViewModelImp cartViewModel = new CartViewModelImp();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +34,7 @@ class CartDetailsScreen extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     child: ListView.builder(
+                      itemCount: controller.cart.length,
                       itemBuilder: (context, index) => Slidable(
                         actionPane: SlidableBehindActionPane(),
                         actionExtentRatio: 0.25,
@@ -55,14 +61,27 @@ class CartDetailsScreen extends StatelessWidget {
                                 Expanded(
                                   flex: 2,
                                   child: CartImageWidget(
-                                    controller: controller,
                                     cartModel: controller.cart[index],
+                                    controller: controller,
                                   ),
                                 ),
                                 Expanded(
                                   flex: 6,
-                                  child: Container(),
+                                  child: CartInfo(cartModel: controller.cart[index]),
                                 ),
+                                Center(
+                                  child: ElegantNumberButton(
+                                    textStyle: TextStyle(color: Colors.white, fontSize: 25),
+                                    color: Colors.amber,
+                                    initialValue: controller.cart[index].quantity,
+                                    minValue: 1,
+                                    maxValue: 100,
+                                    onChanged: (value) {
+                                      cartViewModel.updateCart(controller, index, value.toInt());
+                                    },
+                                    decimalPlaces: 1,
+                                  ),
+                                )
                               ],
                             ),
                           ),
