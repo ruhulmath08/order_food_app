@@ -8,6 +8,7 @@ import 'package:order_food_app/strings/cart_string.dart';
 import 'package:order_food_app/view_model/cart_vm/cart_view_model_imp.dart';
 import 'package:order_food_app/widgets/cart/cart_image_widget.dart';
 import 'package:order_food_app/widgets/cart/cart_info_widget.dart';
+import 'package:order_food_app/widgets/cart/cart_total_widget.dart';
 
 class CartDetailsScreen extends StatelessWidget {
   final box = GetStorage();
@@ -89,6 +90,7 @@ class CartDetailsScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  TotalWidget(controller: controller)
                 ],
               ),
             )
