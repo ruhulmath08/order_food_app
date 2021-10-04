@@ -23,7 +23,16 @@ class CartDetailsScreen extends StatelessWidget {
         actions: [
           controller.getQuantity() > 0
               ? IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.defaultDialog(
+                      title: clearCartConfirmTitleText,
+                      middleText: clearCartConfirmTitleText,
+                      textCancel: cancelText,
+                      textConfirm: confirmText,
+                      confirmTextColor: Colors.yellow,
+                      onConfirm: () => cartViewModel.clearCart(controller),
+                    );
+                  },
                   icon: Icon(Icons.clear),
                 )
               : Container(),
@@ -41,11 +50,19 @@ class CartDetailsScreen extends StatelessWidget {
                         actionExtentRatio: 0.25,
                         secondaryActions: [
                           IconSlideAction(
-                            caption: deleteText,
-                            icon: Icons.delete,
-                            color: Colors.red,
-                            onTap: () {},
-                          ),
+                              caption: deleteText,
+                              icon: Icons.delete,
+                              color: Colors.red,
+                              onTap: () {
+                                Get.defaultDialog(
+                                  title: deleteCartConfirmTitleText,
+                                  middleText: deleteCartConfirmTitleText,
+                                  textCancel: cancelText,
+                                  textConfirm: confirmText,
+                                  confirmTextColor: Colors.yellow,
+                                  onConfirm: () => cartViewModel.deleteCart(controller, index),
+                                );
+                              }),
                         ],
                         child: Card(
                           elevation: 8.0,

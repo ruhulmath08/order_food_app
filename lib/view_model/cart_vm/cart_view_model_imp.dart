@@ -5,5 +5,15 @@ class CartViewModelImp extends CartViewModel {
   void updateCart(CartStateController controller, int index, int value) {
     controller.cart[index].quantity = value.toInt();
     controller.cart.refresh();
+    controller.saveDatabase();
+  }
+
+  void deleteCart(CartStateController controller, int index) {
+    controller.cart.removeAt(index);
+    controller.saveDatabase();
+  }
+
+  void clearCart(CartStateController controller) {
+    controller.clearCart();
   }
 }

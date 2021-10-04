@@ -40,19 +40,21 @@ class CartStateController extends GetxController {
     }
   }
 
-  bool isExist(CartModel cartItem) {
-    return cart.contains(cartItem);
-  }
+  isExist(CartModel cartItem) => cart.any((e) => e.id == cartItem.id);
 
-  sumCart() {
-    return cart.length == 0 ? 0 : cart.map((element) => element.price * element.quantity).reduce((value, element) => value + element);
-  }
+  sumCart() =>
+      cart.length == 0 ? 0 : cart.map((element) => element.price * element.quantity).reduce((value, element) => value + element);
 
-  int getQuantity() {
-    return cart.length == 0 ? 0 : cart.map((element) => element.quantity).reduce((value, element) => value + element);
-  }
+  getQuantity() => cart.length == 0 ? 0 : cart.map((element) => element.quantity).reduce((value, element) => value + element);
 
   getShippingFee() => sumCart() * 0.1; //10% of total value
 
   getSubTotal() => sumCart() + getShippingFee();
+
+  clearCart() {
+    cart.clear();
+    saveDatabase();
+  }
+
+  saveDatabase() => box.write(MY_CART_KEY, jsonEncode(cart));
 }
