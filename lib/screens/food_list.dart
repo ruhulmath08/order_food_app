@@ -8,6 +8,7 @@ import 'package:order_food_app/screens/food_detail.dart';
 import 'package:order_food_app/state/cart_state.dart';
 import 'package:order_food_app/state/category_state.dart';
 import 'package:order_food_app/state/food_list_state.dart';
+import 'package:order_food_app/state/main_state.dart';
 import 'package:order_food_app/strings/food_list_string.dart';
 import 'package:order_food_app/widgets/common/appbar_with_cart_widget.dart';
 import 'package:order_food_app/widgets/common/common_widgets.dart';
@@ -16,6 +17,7 @@ class FoodListScreen extends StatelessWidget {
   final CategoryStateController categoryStateController = Get.find();
   final FoodListStateController foodListStateController = Get.put(FoodListStateController());
   final CartStateController cartStateController = Get.find();
+  final MainStateController mainStateController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +102,10 @@ class FoodListScreen extends StatelessWidget {
                                                   ),
                                                   SizedBox(width: 50),
                                                   IconButton(
-                                                    onPressed: () => cartStateController.addToCart(categoryStateController.selectedCategory.value.foods[index]),
+                                                    onPressed: () => cartStateController.addToCart(
+                                                      categoryStateController.selectedCategory.value.foods[index],
+                                                      mainStateController.selectedRestaurant.value.restaurantId,
+                                                    ),
                                                     icon: Icon(
                                                       Icons.add_shopping_cart,
                                                       color: Colors.white,

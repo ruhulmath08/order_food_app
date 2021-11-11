@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:order_food_app/state/cart_state.dart';
+import 'package:order_food_app/state/main_state.dart';
 import 'package:order_food_app/strings/cart_string.dart';
 import 'package:order_food_app/view_model/cart_vm/cart_view_model_imp.dart';
 import 'package:order_food_app/widgets/cart/cart_image_widget.dart';
@@ -13,6 +14,7 @@ import 'package:order_food_app/widgets/cart/cart_total_widget.dart';
 class CartDetailsScreen extends StatelessWidget {
   final box = GetStorage();
   final CartStateController controller = Get.find();
+  final MainStateController mainStateController = Get.find();
   final CartViewModelImp cartViewModel = new CartViewModelImp();
 
   @override
@@ -21,7 +23,7 @@ class CartDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Cart'),
         actions: [
-          controller.getQuantity() > 0
+          controller.getQuantity(mainStateController.selectedRestaurant.value.restaurantId) > 0
               ? IconButton(
                   onPressed: () {
                     Get.defaultDialog(
@@ -38,7 +40,7 @@ class CartDetailsScreen extends StatelessWidget {
               : Container(),
         ],
       ),
-      body: controller.getQuantity() > 0
+      body: controller.getQuantity(mainStateController.selectedRestaurant.value.restaurantId) > 0
           ? Obx(
               () => Column(
                 children: <Widget>[

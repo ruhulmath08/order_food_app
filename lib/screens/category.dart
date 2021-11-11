@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:order_food_app/model/category_model.dart';
 import 'package:order_food_app/state/category_state.dart';
 import 'package:order_food_app/state/main_state.dart';
-import 'package:order_food_app/strings/restaurant_home_strings.dart';
 import 'package:order_food_app/view_model/category_vm/category_viewmodel_imp.dart';
 import 'package:order_food_app/widgets/category/category_list_widget.dart';
 import 'package:order_food_app/widgets/common/appbar_with_cart_widget.dart';
@@ -18,7 +17,7 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWithCartButton(title: categoryText),
+      appBar: AppBarWithCartButton(title: mainStateController.selectedRestaurant.value.name),
       body: FutureBuilder(
         future: viewModel.displayCategoryByRestaurantId(mainStateController.selectedRestaurant.value.restaurantId),
         builder: (context, snapshot) {

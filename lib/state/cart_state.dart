@@ -11,7 +11,8 @@ class CartStateController extends GetxController {
   var cart = List<CartModel>.empty(growable: true).obs;
   final box = GetStorage();
 
-  addToCart(FoodModel foodModel, {int quantity: 1}) async {
+  getCart(String restaurantId) => cart.where((item) => item.restaurantId == restaurantId);
+  addToCart(FoodModel foodModel, String restaurantId, {int quantity: 1}) async {
     try {
       var cartItem = CartModel(
         id: foodModel.id,
@@ -22,8 +23,9 @@ class CartStateController extends GetxController {
         size: foodModel.size,
         description: foodModel.description,
         quantity: quantity,
+        restaurantId: restaurantId,
       );
-      if (isExist(cartItem)) {
+      if (isExist(cartItem, restaurantId)) {
         //if cart item is already available in cart
         var foodNeedToUpdate = cart.firstWhere((element) => element.id == cartItem.id);
         foodNeedToUpdate.quantity += quantity;
@@ -40,19 +42,21 @@ class CartStateController extends GetxController {
     }
   }
 
-  isExist(CartModel cartItem) => cart.any((e) => e.id == cartItem.id);
+  isExist(CartModel cartItem, String restaurantId) => cart.any((e) => e.id == cartItem.id && e.restaurantId == restaurantId);
 
-  sumCart() =>
-      cart.length == 0 ? 0 : cart.map((element) => element.price * element.quantity).reduce((value, element) => value + element);
+  sumCart(String restaurantId) => getCart(restaurantId).length == 0
+      ? 0
+      : getCart(restaurantId).map((element) => element.price * element.quantity).reduce((value, element) => value + element);
 
-  getQuantity() => cart.length == 0 ? 0 : cart.map((element) => element.quantity).reduce((value, element) => value + element);
+  getQuantity(String restaurantId) =>
+      getCart(restaurantId).length == 0 ? 0 : getCart(restaurantId).map((element) => element.quantity).reduce((value, element) => value + element);
 
-  getShippingFee() => sumCart() * 0.1; //10% of total value
+  getShippingFee(String restaurantId) => sumCart(restaurantId) * 0.1; //10% of total value
 
-  getSubTotal() => sumCart() + getShippingFee();
+  getSubTotal(String restaurantId) => sumCart(restaurantId) + getShippingFee(restaurantId);
 
-  clearCart() {
-    cart.clear();
+  clearCart(String restaurantId) {
+    getCart(restaurantId).clear();
     saveDatabase();
   }
 

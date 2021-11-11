@@ -5,6 +5,7 @@ import 'package:order_food_app/const/const.dart';
 import 'package:order_food_app/state/cart_state.dart';
 import 'package:order_food_app/state/food_detail_state.dart';
 import 'package:order_food_app/state/food_list_state.dart';
+import 'package:order_food_app/state/main_state.dart';
 import 'package:order_food_app/utils/utils.dart';
 
 class FoodDetailImageWidget extends StatelessWidget {
@@ -17,6 +18,7 @@ class FoodDetailImageWidget extends StatelessWidget {
   }) : super(key: key);
 
   final FoodListStateController foodListStateController;
+  final MainStateController mainStateController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +60,7 @@ class FoodDetailImageWidget extends StatelessWidget {
                   heroTag: FAB_CART_TAG,
                   onPressed: () => cartStateController.addToCart(
                     foodListStateController.selectedFood.value,
+                    mainStateController.selectedRestaurant.value.restaurantId,
                     quantity: foodDetailStateController.quantity.value,
                   ),
                   child: Icon(Icons.add_shopping_cart, color: Colors.black),

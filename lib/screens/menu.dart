@@ -44,8 +44,17 @@ class MenuScreen extends StatelessWidget {
             Divider(thickness: 1, color: Colors.white70),
             HomeMenuWidget(zoomDrawerController: zoomDrawerController),
             Divider(thickness: 1, color: Colors.white70),
-            MenuWidget(callback: viewModel.navigateCategories, icon: Icons.list, menuName: categoryText),
+            MenuWidget(
+              callback: viewModel.backToRestaurantList,
+              icon: Icons.restaurant_rounded,
+              menuName: restaurantListText,
+            ),
             Divider(thickness: 1, color: Colors.white70),
+            MenuWidget(
+              callback: viewModel.navigateCategories,
+              icon: Icons.list,
+              menuName: categoryText,
+            ),
           ],
         ),
       ),
