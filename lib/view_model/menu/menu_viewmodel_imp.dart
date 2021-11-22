@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:order_food_app/screens/category.dart';
 import 'package:order_food_app/screens/restaurent_home.dart';
+import 'package:order_food_app/strings/main_strings.dart';
 import 'package:order_food_app/utils/const.dart';
 
 import 'menu_viewmodel.dart';
@@ -31,14 +32,40 @@ class MenuViewModelImp extends MenuViewModel {
     if (user == null) {
       FlutterAuthUi.startUi(
         items: [AuthUiProvider.phone],
-        tosAndPrivacyPolicy: tosAndPrivacyPolicy,
-      );
+        tosAndPrivacyPolicy: TosAndPrivacyPolicy(
+          tosUrl: 'https://google.com',
+          privacyPolicyUrl: 'https://youtube.com',
+        ),
+        androidOption: AndroidOption(
+          enableSmartLock: false,
+          showLogo: true,
+          overrideTheme: true,
+        ),
+      ).then((value) async {
+        navigationHome(context);
+      }).catchError((e) {
+        Get.snackbar('Error', '$e');
+      });
     }
   }
 
   @override
   void logout(BuildContext context) {
-    FirebaseAuth.instance.signOut().then((value) => Get.offAll(RestaurantHome()));
+    Get.defaultDialog(
+      title: logoutTitle,
+      content: Text(logoutText),
+      backgroundColor: Colors.white,
+      cancel: ElevatedButton(onPressed: () => Get.back(), child: Text(cancelText)),
+      confirm: ElevatedButton(
+        onPressed: () {
+          FirebaseAuth.instance.signOut().then((value) => Get.offAll(RestaurantHome()));
+        },
+        child: Text(
+          confirmText,
+          style: TextStyle(color: Colors.red),
+        ),
+      ),
+    );
   }
 
   @override
@@ -50,6 +77,6 @@ class MenuViewModelImp extends MenuViewModel {
 
   @override
   void processLoginState(BuildContext context) {
-    // TODO: implement processLoginState
+    print('login clicked');
   }
 }
